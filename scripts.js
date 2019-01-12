@@ -7,6 +7,7 @@ clear_form.onclick = function() {
 	document.getElementById("sqfootage").value = "";
 	document.getElementById("zipcode").value = "";
 	document.getElementById("avgprice").value = "";
+	document.getElementById("result").innerHTML = "";
 }
 
 calculate_price.onclick = function() {
@@ -15,6 +16,7 @@ calculate_price.onclick = function() {
 	square_footage = document.getElementById("sqfootage").value;
 	zipcode = document.getElementById("zipcode").value;
 	avg_price = document.getElementById("avgprice").value;
+	document.getElementById("result").innerHTML = "</br></br><div class=\"text-center alert alert-success\" role=\"alert\">Calculated Price: NaN</div>";
 }
 
 // https://js.tensorflow.org/tutorials/import-saved-model.html

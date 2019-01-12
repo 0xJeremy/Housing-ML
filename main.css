@@ -52,13 +52,11 @@
   background-color: #00b09b;
   border-color: #00b09b;
 }
-
 .btn-calculate:hover {
   color: #fff;
   background-color: #007b6c;
   border-color: #00584d;
 }
-
 .btn-calculate:focus, .btn-calculate.focus {
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(0, 88, 77, 0.50);
 }
