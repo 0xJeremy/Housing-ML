@@ -1,6 +1,12 @@
 var clear_form = document.getElementById("clear_form");
 var calculate_price = document.getElementById("calculate_price");
 
+var model;
+window.onload = async function load_model() {
+	model = await tf.loadModel('model.json');
+	console.log("Model Loaded");
+}
+
 clear_form.onclick = function() {
 	document.getElementById("beds").value = "";
 	document.getElementById("baths").value = "";
@@ -11,12 +17,25 @@ clear_form.onclick = function() {
 }
 
 calculate_price.onclick = function() {
-	num_beds = document.getElementById("beds").value;
-	num_baths = document.getElementById("baths").value;
-	square_footage = document.getElementById("sqfootage").value;
-	zipcode = document.getElementById("zipcode").value;
-	avg_price = document.getElementById("avgprice").value;
-	document.getElementById("result").innerHTML = "</br></br><div class=\"text-center alert alert-success\" role=\"alert\">Calculated Price: NaN</div>";
+	num_beds = parseFloat(document.getElementById("beds").value);
+	num_baths = parseFloat(document.getElementById("baths").value);
+	square_footage = parseFloat(document.getElementById("sqfootage").value);
+	zipcode = parseFloat(document.getElementById("zipcode").value);
+	avg_price = parseFloat(document.getElementById("avgprice").value);
+	if(num_beds && num_baths && square_footage && zipcode && avg_price) {
+		price = predict_price();
+		document.getElementById("result").innerHTML = "</br></br><div class=\"text-center alert alert-success\" role=\"alert\">Calculated Price: $" + price + "</div>";	
+	}
+	else {
+		document.getElementById("result").innerHTML = "</br></br><div class=\"text-center alert alert-danger\" role=\"alert\">Error: Missing Information</div>";
+	}
+}
+
+async function predict_price() {
+	prediction_tensor = tf.tensor2d([[num_beds, num_baths, square_footage, zipcode]], [1, 4]);
+	const prediction = model.predict(prediction_tensor);
+	console.log(prediction.toString());
+	return prediction;
 }
 
 // https://js.tensorflow.org/tutorials/import-saved-model.html
