@@ -16,3 +16,6 @@ calculate_price.onclick = function() {
 	zipcode = document.getElementById("zipcode").value;
 	avg_price = document.getElementById("avgprice").value;
 }
+
+// https://js.tensorflow.org/tutorials/import-saved-model.html
+// https://js.tensorflow.org/tutorials/import-keras.html

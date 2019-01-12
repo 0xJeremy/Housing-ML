@@ -34,40 +34,40 @@ test_labels = test_dataset.pop('price')
 
 
 def norm(x):
-  return (x - (train_stats['50%']+train_stats['mean'])/2) / train_stats['std']
+    return (x - (train_stats['50%']+train_stats['mean'])/2) / train_stats['std']
 
 normed_train_data = norm(train_dataset)
 normed_test_data = norm(test_dataset)
 
 
 def build_model():
-  model = keras.Sequential([
+    model = keras.Sequential([
         layers.Dense(64, activation=tf.nn.relu, input_shape=[len(train_dataset.keys())]),
         layers.Dense(64, activation=tf.nn.relu), 
         layers.Dense(64, activation=tf.nn.relu),
         layers.Dense(1)
         ])
-  
-  optimizer = tf.train.RMSPropOptimizer(0.001)
-  
-  model.compile(loss='mse',
-            optimizer=optimizer,
-            metrics=['mae','mse'])
-  return model
+    
+    optimizer = tf.train.RMSPropOptimizer(0.001)
+    
+    model.compile(loss='mse',
+        optimizer=optimizer,
+        metrics=['mae','mse'])
+    return model
 
 model = build_model()
 
 early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=50)
 
 class PrintDot(keras.callbacks.Callback):
-  def on_epoch_end(self, epoch, logs):
-         epoch % 100 == 0: print('')
+    def on_epoch_end(self, epoch, logs):
+        epoch % 100 == 0: print('')
         int('.', end='')
         POCHS = 100000
 
 history = model.fit(normed_train_data, train_labels, epochs=EPOCHS,
-            validation_split=0.2, verbose=0,
-            callbacks=[early_stop, PrintDot()])
+        validation_split=0.2, verbose=0,
+        callbacks=[early_stop, PrintDot()])
 
 hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch
@@ -77,25 +77,25 @@ print(hist.tail())
 import matplotlib.pyplot as plt
 #error
 def plot_history(history):
-  plt.figure()
-  plt.xlabel('Epoch')
-  plt.ylabel('Mean Abs Error [Price]')
-  plt.plot(hist['epoch'], hist['mean_absolute_error'],
-         label='Train Error')
-  plt.plot(hist['epoch'], hist['val_mean_absolute_error'],
-         label = 'Val Error')
-  plt.legend()
-  plt.ylim([0,5])
-  
-  plt.figure()
-  plt.xlabel('Epoch')
-  plt.ylabel('Mean Square Error [Price^2]')
-  plt.plot(hist['epoch'], hist['mean_squared_error'],
-         label='Train Error')
-  plt.plot(hist['epoch'], hist['val_mean_squared_error'],
-         label = 'Val Error')
-  plt.legend()
-  plt.ylim([0,5000000000])
+    plt.figure()
+    plt.xlabel('Epoch')
+    plt.ylabel('Mean Abs Error [Price]')
+    plt.plot(hist['epoch'], hist['mean_absolute_error'],
+        label='Train Error')
+    plt.plot(hist['epoch'], hist['val_mean_absolute_error'],
+        label = 'Val Error')
+    plt.legend()
+    plt.ylim([0,5])
+    
+    plt.figure()
+    plt.xlabel('Epoch')
+    plt.ylabel('Mean Square Error [Price^2]')
+    plt.plot(hist['epoch'], hist['mean_squared_error'],
+        label='Train Error')
+    plt.plot(hist['epoch'], hist['val_mean_squared_error'],
+        label = 'Val Error')
+    plt.legend()
+    plt.ylim([0,5000000000])
 
 plot_history(history)
 
