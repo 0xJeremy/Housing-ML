@@ -1,0 +1,40 @@
+.bg {
+	height: 100%;
+	position: fixed;
+	font-family: 'Open Sans', sans-serif;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-repeat:no-repeat;
+	background: -webkit-linear-gradient(#00b09b, #96c93d);
+	background: -moz-linear-gradient(#00b09b, #96c93d);
+	background: -ms-linear-gradient(#00b09b, #96c93d);
+	background: -o-linear-gradient(#00b09b, #96c93d);
+	background: linear-gradient(#00b09b, #96c93d);
+}
+
+.bg-inner {
+	background: #ecf0f1;
+	padding-left: 5em;
+	padding-right: 5em;
+	padding-top: 5em;
+	padding-bottom: 5em;
+}
+
+.center-vertical {
+	padding-top: 5em;
+/*	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);*/
+}
+
+.title-text {
+	font-weight: lighter;
+	font-family: bookman;
+	font-size: 3em;
+	color: #ecf0f1;
+}
