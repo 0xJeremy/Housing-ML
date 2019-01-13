@@ -10,7 +10,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import tensorflowjs as tfjs
 #import data
-raw_dataset = pd.read_csv('housing_data_tf.csv', na_values = '?')
+raw_dataset = pd.read_csv('training_data_TF.csv', na_values = '?')
 dataset = raw_dataset.copy()
 
 #normalize price for zipcode
