@@ -44,3 +44,4 @@ function predict_price() {
 
 // https://js.tensorflow.org/tutorials/import-saved-model.html
 // https://js.tensorflow.org/tutorials/import-keras.html
+// run with "python -m http.server"
